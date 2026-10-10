@@ -1,0 +1,48 @@
+name: Verifier CI
+
+on:
+  push:
+    paths:
+      - 'verifier/**'
+      - '.github/workflows/verifier-ci.yml'
+  pull_request:
+    paths:
+      - 'verifier/**'
+      - '.github/workflows/verifier-ci.yml'
+
+jobs:
+  test:
+    name: Test Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ./verifier
+          pip install pytest
+
+      - name: Run Standalone Verifier Tests
+        run: |
+          pytest verifier/tests/ -v
+
+      - name: Test CLI Execution
+        run: |
+          blocklog-verify verifier/examples/witnessed_receipt.json \
+            --trust-root-file verifier/examples/trust_roots.json \
+            --witness-roots verifier/examples/witness_roots.json \
+            --counterparty-roots verifier/examples/counterparty_roots.json \
+            --json-output

@@ -1,0 +1,7 @@
+Blocklog Standalone Verifier (blocklog-verifier)
+Copyright 2026 Blocklog Authors and Contributors
+
+This product includes software developed at Blocklog (https://github.com/blocklog/blocklog).
+
+This product includes cryptographic verification primitives implementing RFC 6962
+Merkle consistency proofs and Ed25519 digital signature validation.
