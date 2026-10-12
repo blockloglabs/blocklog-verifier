@@ -20,9 +20,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-from verifier.canonical import canonical_encode, sha256_hex
-from verifier.crypto import decode_bytes, verify_ed25519_signature
-from verifier.merkle import rfc6962_verify_consistency, sha256_digest
+from .canonical import canonical_encode, sha256_hex
+from .crypto import decode_bytes, verify_ed25519_signature
+from .merkle import rfc6962_verify_consistency, sha256_digest
 
 
 @dataclass

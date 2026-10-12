@@ -51,6 +51,6 @@ dev = [
 [project.scripts]
 blocklog-verify = "verifier.cli:main"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["verifier*"]
+[tool.setuptools]
+package-dir = {"verifier" = "."}
+packages = ["verifier"]

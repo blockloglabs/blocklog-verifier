@@ -10,7 +10,7 @@ import json
 import sys
 from pathlib import Path
 
-from verifier.core import (
+from .core import (
     StandaloneReceiptVerifier,
     TrustRoot,
     verify_receipt_file,

@@ -5,7 +5,7 @@ Zero backend dependencies. Operates completely offline.
 Depends only on Python standard library and standard `cryptography` package.
 """
 
-from verifier.core import (
+from .core import (
     StandaloneReceiptVerifier,
     VerificationResult,
     VerificationCheck,
@@ -13,16 +13,16 @@ from verifier.core import (
     verify_receipt_data,
     verify_receipt_file,
 )
-from verifier.canonical import (
+from .canonical import (
     canonical_encode,
     nfc_normalize,
     sha256_hex,
 )
-from verifier.crypto import (
+from .crypto import (
     verify_ed25519_signature,
     decode_bytes,
 )
-from verifier.merkle import (
+from .merkle import (
     rfc6962_leaf_hash,
     rfc6962_node_hash,
     rfc6962_tree_hash,
@@ -31,7 +31,7 @@ from verifier.merkle import (
     rfc6962_consistency_proof,
     rfc6962_verify_consistency,
 )
-from verifier.witness import (
+from .witness import (
     IndependentWitness,
     WitnessState,
     WitnessAcknowledgement,
@@ -40,7 +40,7 @@ from verifier.witness import (
     MemoryWitnessStorage,
     SqliteWitnessStorage,
 )
-from verifier.attestation import (
+from .attestation import (
     CounterpartyAttestation,
     CounterpartySigner,
     verify_counterparty_attestation,

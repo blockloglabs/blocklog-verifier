@@ -9,10 +9,10 @@ from __future__ import annotations
 import json
 from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
-from verifier.canonical import canonical_encode, sha256_hex
-from verifier.crypto import decode_bytes, verify_ed25519_signature
+from .canonical import canonical_encode, sha256_hex
+from .crypto import decode_bytes, verify_ed25519_signature
 
 
 @dataclass
@@ -118,7 +118,7 @@ class CounterpartySigner:
         
         from cryptography.hazmat.primitives.asymmetric import ed25519
         from cryptography.hazmat.primitives import serialization
-        from verifier.crypto import decode_bytes
+        from .crypto import decode_bytes
         self._key = ed25519.Ed25519PrivateKey.from_private_bytes(decode_bytes(private_key_hex))
         self.public_key_hex = self._key.public_key().public_bytes(
             encoding=serialization.Encoding.Raw,

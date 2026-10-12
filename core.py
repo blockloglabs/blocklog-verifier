@@ -15,17 +15,17 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from verifier.canonical import canonical_encode, sha256_hex
-from verifier.crypto import decode_bytes, verify_ed25519_signature
-from verifier.merkle import (
+from .canonical import canonical_encode, sha256_hex
+from .crypto import decode_bytes, verify_ed25519_signature
+from .merkle import (
     rfc6962_verify_consistency,
     rfc6962_verify_inclusion,
 )
-from verifier.witness import (
+from .witness import (
     WitnessAcknowledgement,
     canonicalize_checkpoint_for_verification,
 )
-from verifier.attestation import (
+from .attestation import (
     CounterpartyAttestation,
     verify_counterparty_attestation,
 )
