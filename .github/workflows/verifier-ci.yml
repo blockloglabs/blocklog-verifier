@@ -2,13 +2,13 @@ name: Verifier CI
 
 on:
   push:
+    branches: [ main ]
     paths:
-      - 'verifier/**'
-      - '.github/workflows/verifier-ci.yml'
+      - '**'
   pull_request:
+    branches: [ main ]
     paths:
-      - 'verifier/**'
-      - '.github/workflows/verifier-ci.yml'
+      - '**'
 
 jobs:
   test:
@@ -32,17 +32,17 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ./verifier
+          pip install .
           pip install pytest
 
       - name: Run Standalone Verifier Tests
         run: |
-          pytest verifier/tests/ -v
+          pytest tests/ -v
 
       - name: Test CLI Execution
         run: |
-          blocklog-verify verifier/examples/witnessed_receipt.json \
-            --trust-root-file verifier/examples/trust_roots.json \
-            --witness-roots verifier/examples/witness_roots.json \
-            --counterparty-roots verifier/examples/counterparty_roots.json \
+          blocklog-verify examples/witnessed_receipt.json \
+            --trust-root-file examples/trust_roots.json \
+            --witness-roots examples/witness_roots.json \
+            --counterparty-roots examples/counterparty_roots.json \
             --json-output

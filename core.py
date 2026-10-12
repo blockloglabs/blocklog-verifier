@@ -352,7 +352,13 @@ class StandaloneReceiptVerifier:
                 try:
                     # Extract leaf_index from proof if available, otherwise default to 0
                     leaf_index = merkle_proof.get("leaf_index", 0)
-                    tree_size = merkle_proof.get("tree_size", 1)
+                    tree_size = merkle_proof.get("tree_size")
+                    if tree_size is None:
+                        cp = receipt.get("transparency_checkpoint")
+                        if isinstance(cp, dict) and cp.get("tree_size"):
+                            tree_size = cp.get("tree_size")
+                        else:
+                            tree_size = 1
 
                     # Use RFC 6962 verification (normative for Phase E)
                     valid = rfc6962_verify_inclusion(
